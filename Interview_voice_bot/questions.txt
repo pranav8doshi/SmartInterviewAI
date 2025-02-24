@@ -1,0 +1,16 @@
+[Easy]
+What is an array?
+Explain the difference between a stack and a queue.
+What is a linked list?
+Define a binary search.
+
+[Medium]
+How does merge sort work?
+What is dynamic programming?
+Explain the difference between breadth-first search and depth-first search.
+
+
+[Hard]
+Explain the time complexity of quicksort in the best, average, and worst cases.
+What is a trie data structure and where is it used?
+How do you implement Dijkstra’s algorithm?

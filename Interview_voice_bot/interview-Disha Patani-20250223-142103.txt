@@ -1,0 +1,23 @@
+Question (Easy): What is normalization in databases?
+Answer: normalisation is removing the students
+Question (Medium): How do you find the middle of a linked list?
+Question (Medium): How do you find the middle of a linked list?
+Question (Medium): How do you find the middle of a linked list?
+Answer: the middle of the linked list specified by the number of nodes divided by 2 +
+Question (Hard): How do CDNs (Content Delivery Networks) work?
+Answer: Skipped (User requested to move on)
+Question (Easy): What are the different types of trees in data structures?
+Answer: types of trees in data structures are available in binary trees red and black
+Question (Medium): What are transactions in SQL?
+Error recognizing response
+Question (Hard): Explain how load balancing works.
+Answer: load
+Question (Easy): What is a linked list?
+Answer: non
+Question (Medium): Explain the concept of bandwidth and latency.
+Question (Medium): Explain the concept of bandwidth and latency.
+Answer: Skipped (User requested to move on)
+Question (Hard): Explain two-phase commit protocol.
+Answer: Skipped (User requested to move on)
+Question (Easy): Explain the difference between a stack and a queue.
+Answer: stack follows last in first out rule and choose follows first in first out

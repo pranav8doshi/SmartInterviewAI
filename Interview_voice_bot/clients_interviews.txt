@@ -1,0 +1,32 @@
+Client: Samika Gandhi | Date: 20250223-094136
+Easy Avg: 1.33, Medium Avg: 0.00, Hard Avg: 2.50
+Final Interview Score: 1.00 (Out of 10)
+
+Client: Fagun Yani | Date: 20250223-095300
+Easy Avg: 1.25, Medium Avg: 3.00, Hard Avg: 2.00
+Final Interview Score: 1.92 (Out of 10)
+
+Client: Disha Patani | Date: 20250223-142103
+Easy Avg: 1.00, Medium Avg: 3.00, Hard Avg: 1.00
+Final Interview Score: 0.80 (Out of 10)
+
+Client: dev Adani | Date: 20250223-143402
+Easy Avg: 4.00, Medium Avg: 3.00, Hard Avg: 4.00
+Final Interview Score: 2.33 (Out of 10)
+
+Client: pra | Date: 20250223-172845
+Easy Avg: 1.75, Medium Avg: 2.20, Hard Avg: 1.33
+Final Interview Score: 1.57 (Out of 10)
+
+Client: pranav | Date: 20250224-172808
+Easy Avg: 1.00, Medium Avg: 3.50, Hard Avg: 0.00
+Final Interview Score: 0.89 (Out of 10)
+
+Client: pranav | Date: 20250224-181122
+Easy Avg: 0.00, Medium Avg: 3.00, Hard Avg: 1.00
+Final Interview Score: 0.80 (Out of 10)
+
+Client: pranav | Date: 20250224-182122
+Easy Avg: 6.00, Medium Avg: 4.00, Hard Avg: 5.00
+Final Interview Score: 3.17 (Out of 10)
+

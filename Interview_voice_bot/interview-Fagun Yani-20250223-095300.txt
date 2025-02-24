@@ -1,0 +1,25 @@
+Question (Easy): What is a priority queue?
+Answer: is the data structure in which the priority is given
+Question (Medium): What is a hash table and how does it work?
+Answer: hashtable stores the hash
+Question (Hard): Explain the time complexity of quicksort in the best, average, and worst cases.
+Answer: time complexity of the quick sort in best average and worst cases is log
+Question (Easy): Explain FIFO and LIFO with examples.
+Answer: iPhone is first in first out and lifo is last in first out for FIFA it is which goes in first comes out first
+Question (Medium): Explain the difference between breadth-first search and depth-first search.
+Answer: breadth first search the adjacent sides of node are considered first instead of childhood and in the first search the
+Question (Hard): What is eventual consistency in distributed databases?
+Error recognizing response
+Question (Easy): What are the different layers of the OSI model?
+Answer: there are seven different
+Question (Medium): What are the advantages and disadvantages of recursion?
+Answer: advantages of recursion is that we don't have to write many lines of code in the function can call itself it increases the efficiency of the code and disadvantage is if we don't give the best condition it will go
+Question (Hard): Explain the difference between stateful and stateless firewalls.
+Answer: to the next question
+Question (Easy): What are the different types of trees in data structures?
+Answer: different types of trees is Pioneer binary
+Question (Medium): How do you implement a binary search tree?
+Answer: binary search tree there is only
+Question (Hard): Explain two-phase commit protocol.
+Question (Hard): Explain two-phase commit protocol.
+Answer: the next question
