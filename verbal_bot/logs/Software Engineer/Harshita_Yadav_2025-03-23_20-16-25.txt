@@ -1,0 +1,56 @@
+Q: Describe a project where you optimized performance.
+A: nothing is that I have done this thing but I am not
+Score: 0/10
+----------------------------------------
+Q: What are the key differences between Python and Java?
+A: the major key differences between Python and Java are both are the
+Score: 0/10
+----------------------------------------
+Q: Explain the concept of recursion with an example.
+A: which runs on bytecode but Python does not have an interpreter comp
+Score: 0/10
+----------------------------------------
+Q: What is your experience with cloud computing?
+A: actually I cannot
+Score: 0/10
+----------------------------------------
+Q: Can you explain what's preventing you from answering the question?
+A: so the thing is I have to give an interview for other exam
+Score: 8/10
+----------------------------------------
+Q: What are microservices and why are they useful?
+A: I don't know
+Score: 0/10
+----------------------------------------
+Q: What are RESTful APIs and how do they work?
+A: Mohan
+Score: 0/10
+----------------------------------------
+Q: Who is Mohan, and what is he known for?
+A: Mohan is a guest name who is the game
+Score: 0/10
+----------------------------------------
+Q: Can you explain object-oriented programming?
+A: sorry for that I don't know
+Score: 0/10
+----------------------------------------
+Q: Would you like to take a moment to look up the information or is there a related area you're more familiar with that we could discuss instead?
+A: not excited
+Score: 0/10
+----------------------------------------
+Q: How do you handle debugging complex issues?
+A: I give my friend request for it
+Score: 0/10
+----------------------------------------
+Q: Did your friend accept the request and are you now connected with them?
+A: yes
+Score: 10/10
+----------------------------------------
+Q: How do you ensure code scalability?
+A: it's ok
+Score: 0/10
+----------------------------------------
+Q: Can you elaborate on what you mean by "it's ok" and provide more context or details about the topic we're discussing?
+A: not interested
+Score: 0/10
+----------------------------------------

@@ -1,0 +1,4 @@
+Q: Explain the difference between UI and UX.
+A: UI is the interface UX is the design
+Score: 6/10
+----------------------------------------

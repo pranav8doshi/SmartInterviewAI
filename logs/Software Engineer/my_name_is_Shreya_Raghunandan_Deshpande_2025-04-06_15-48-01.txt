@@ -1,0 +1,16 @@
+Q: What are RESTful APIs and how do they work?
+A: I don't know
+Score: 0/10
+----------------------------------------
+Q: What are RESTful APIs and how do they work?
+A: I don't know
+Score: 0/10
+----------------------------------------
+Q: Can you explain object-oriented programming?
+A: object oriented programming is
+Score: 8/10
+----------------------------------------
+Q: Can you explain object-oriented programming?
+A: object oriented programming is
+Score: 8/10
+----------------------------------------

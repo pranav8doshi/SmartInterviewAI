@@ -1,0 +1,12 @@
+Q: What is feature engineering and why is it important?
+A: teacher engineering it is important very important feature engineering is very important yes yes it is very important
+Score: 0/10
+----------------------------------------
+Q: What is feature engineering and why is it important?
+A: teacher engineering it is important very important feature engineering is very important yes yes it is very important
+Score: 0/10
+----------------------------------------
+Q: What are common pitfalls in data science projects?
+A: the common pitfalls in data science projects are may be outliers missing values
+Score: 8/10
+----------------------------------------
