@@ -1,0 +1,20 @@
+
+Interview Report
+===============
+Candidate: aaaa
+Role: Software Engineer
+Date: 2025-05-01_14-10-57
+Total Questions: 2
+Total Score: 0/20
+
+Detailed Results:
+
+Question 1: Explain the concept of recursion with an example.
+Answer: hello how are you
+Score: 0/10
+========================================
+
+Question 2: That's a friendly greeting, but I'd like to get to know you better in a professional context. What motivated you to apply for this position, and what qualities do you think make you a strong candidate?
+Answer: move on
+Score: 0/10
+========================================

@@ -1,6 +1,0 @@
-services:
-  - type: web
-    name: smartinterviewai
-    env: python
-    buildCommand: ./build.sh
-    startCommand: gunicorn app:app

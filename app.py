@@ -91,12 +91,14 @@ def _speak(text):
         current_voice = engine.getProperty('voice')
         if 'male' in current_voice.lower():
             engine = ensure_feminine_voice()
-            
-        if engine._inLoop:
-            engine.endLoop()
+        
+        # Avoid speaking if already busy
+        if engine.isBusy():
+            engine.stop()
         
         engine.say(text)
         engine.runAndWait()
+
     except RuntimeError:
         engine = ensure_feminine_voice()
         engine.say(text)
@@ -110,11 +112,51 @@ def _speak(text):
             engine.runAndWait()
         except:
             pass
-    finally:
         try:
             engine.stop()
         except:
             pass
+
+def speak(text):
+    """Thread-safe speaking function with guaranteed feminine voice"""
+    threading.Thread(target=_speak, args=(text,)).start()
+
+# def _speak(text):
+#     """Speaks the given text using pyttsx3 with proper handling of the engine loop."""
+#     global engine
+#     try:
+#         # Ensure we have a working engine with feminine voice
+#         if not engine:
+#             engine = ensure_feminine_voice()
+        
+#         # Ensure voice is still feminine (in case of engine reset)
+#         current_voice = engine.getProperty('voice')
+#         if 'male' in current_voice.lower():
+#             engine = ensure_feminine_voice()
+            
+#         if engine._inLoop:
+#             engine.endLoop()
+        
+#         engine.say(text)
+#         engine.runAndWait()
+#     except RuntimeError:
+#         engine = ensure_feminine_voice()
+#         engine.say(text)
+#         engine.runAndWait()
+#     except Exception as e:
+#         print(f"Error in speech synthesis: {e}")
+#         # Attempt complete reinitialization
+#         engine = ensure_feminine_voice()
+#         try:
+#             engine.say(text)
+#             engine.runAndWait()
+#         except:
+#             pass
+#     finally:
+#         try:
+#             engine.stop()
+#         except:
+#             pass
 
 def speak(text):
     """Thread-safe speaking function with guaranteed feminine voice"""
