@@ -6,3 +6,4 @@ pyttsx3
 sounddevice
 psutil
 requests
+gunicorn==23.0.0
