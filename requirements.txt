@@ -1,0 +1,8 @@
+Flask
+python-dotenv
+together==1.1.0
+SpeechRecognition
+pyttsx3
+pyaudio
+psutil
+requests
