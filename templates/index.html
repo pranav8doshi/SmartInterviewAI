@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Interview Bot</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.75);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 50;
+    }
+    .modal-content {
+      background-color: #1f2937;
+      padding: 1.5rem;
+      border-radius: 0.5rem;
+      max-width: 28rem;
+      width: 90%;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    }
+    .guideline-item {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 0.5rem;
+    }
+    .guideline-icon {
+      margin-right: 0.5rem;
+      color: #3b82f6;
+    }
+  </style>
+</head>
+<body class="flex items-center justify-center min-h-screen bg-gray-900 text-white">
+  <div class="bg-gray-800 p-8 rounded-2xl shadow-lg w-full max-w-md text-center">
+    <h1 class="text-2xl font-semibold mb-6">Welcome to the Interview Bot</h1>
+
+    <form id="interview-form" class="space-y-4">
+      <div class="text-left">
+        <label for="username" class="block text-gray-300 mb-1 text-sm">Enter your name:</label>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          required
+          class="w-full px-4 py-2 text-gray-900 rounded-lg border border-gray-600 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+        />
+      </div>
+
+      <div class="text-left">
+        <label for="role" class="block text-gray-300 mb-1 text-sm">Select a job role:</label>
+        <select
+          id="role"
+          name="role"
+          required
+          class="w-full px-4 py-2 text-gray-900 rounded-lg border border-gray-600 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+        >
+          <option value="Software Engineer">Software Engineer</option>
+          <option value="Data Scientist">Data Scientist</option>
+          <option value="Product Manager">Product Manager</option>
+        </select>
+      </div>
+
+      <button
+        type="submit"
+        class="w-full bg-blue-600 hover:bg-blue-700 transition-all px-4 py-2 rounded-lg text-white font-semibold"
+      >
+        Start Interview
+      </button>
+    </form>
+
+    <div id="warning-modal" class="hidden modal-overlay">
+      <div class="modal-content">
+        <h2 class="text-xl font-bold mb-4 text-center">Important Interview Guidelines</h2>
+        <ul class="text-left mb-6 space-y-3">
+          <li class="guideline-item">
+            <span class="guideline-icon">•</span>
+            <span>Do not switch tabs or browser windows during the interview</span>
+          </li>
+          <li class="guideline-item">
+            <span class="guideline-icon">•</span>
+            <span>Conduct the interview in a quiet, empty room</span>
+          </li>
+          <li class="guideline-item">
+            <span class="guideline-icon">•</span>
+            <span>Camera and microphone must remain on at all times</span>
+          </li>
+          <li class="guideline-item">
+            <span class="guideline-icon">•</span>
+            <span>Any violation will result in immediate interview termination</span>
+          </li>
+        </ul>
+        <div class="flex justify-center space-x-4">
+          <button id="cancel-interview" class="px-4 py-2 bg-gray-600 rounded-lg hover:bg-gray-700">Cancel</button>
+          <button id="confirm-interview" class="px-4 py-2 bg-blue-600 rounded-lg hover:bg-blue-700">I Understand</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const form = document.getElementById("interview-form");
+      const warningModal = document.getElementById("warning-modal");
+      const confirmBtn = document.getElementById("confirm-interview");
+      const cancelBtn = document.getElementById("cancel-interview");
+      let meetingWindow = null;
+
+      // Handle messages from meeting window
+      window.addEventListener('message', function(event) {
+        if (event.data.type === 'interview_ended') {
+          if (meetingWindow && !meetingWindow.closed) {
+            meetingWindow.close();
+          }
+        }
+      });
+
+      form.addEventListener("submit", function (event) {
+        event.preventDefault();
+        warningModal.classList.remove("hidden");
+      });
+
+      cancelBtn.addEventListener("click", function() {
+        warningModal.classList.add("hidden");
+      });
+
+      confirmBtn.addEventListener("click", function() {
+        const username = document.getElementById("username").value;
+        const role = document.getElementById("role").value;
+        
+        // Open meeting tab
+        meetingWindow = window.open("/meeting", "_blank", "width=" + screen.width + ",height=" + screen.height);
+        
+        if (!meetingWindow) {
+          alert("Popup was blocked. Please allow popups for this site.");
+          return;
+        }
+        
+        warningModal.classList.add("hidden");
+        
+        // Start interview after slight delay
+        setTimeout(() => {
+          fetch("/start_interview", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ username, role, question_index: -1, answer: "" })
+          });
+        }, 2000);
+      });
+    });
+  </script>
+</body>
+</html>

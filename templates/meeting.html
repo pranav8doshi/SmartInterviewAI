@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Video & Webcam Meeting Interface</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
+    <style>
+        
+        html, body {
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #222;
+            margin: 0;
+            flex-direction: column;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            height: calc(100% - 70px);
+            background: #333;
+            padding: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+        .video-section {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 20px;
+            height: 100%;
+        }
+        .video-box, .webcam {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #444;
+            border-radius: 10px;
+            position: relative;
+            min-height: 300px;
+        }
+        video {
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+        #webcamVideo {
+            transform: scaleX(-1);
+        }
+        .meeting-menu {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #333;
+            padding: 10px 15px;
+            border-radius: 30px;
+            gap: 15px;
+        }
+        .btn {
+            width: 50px;
+            height: 50px;
+            background: #444;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: 0.3s;
+            border: none;
+            font-size: 18px;
+            color: white;
+        }
+        .btn:hover {
+            background: #555;
+        }
+        .btn.red {
+            background: red;
+        }
+        .btn.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        #warning-toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #f44336;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 4px;
+            z-index: 1000;
+            display: none;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        #focus-warning {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: #f44336;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            display: none;
+            z-index: 1000;
+            font-weight: bold;
+            font-size: 18px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        .video-label {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            background-color: rgba(0,0,0,0.7);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div id="focus-warning">
+        <i class="fas fa-exclamation-triangle"></i> WARNING: You switched tabs/windows. Return immediately or the interview will be terminated!
+    </div>
+    
+    <div class="container">
+        <div class="video-section">
+            <div class="video-box">
+                <video id="aiVideo" autoplay muted>
+                    <source src="{{ url_for('static', filename='ai.mp4') }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <div class="video-label">Interview Bot</div>
+            </div>
+            <div class="webcam">    
+                <video id="webcamVideo" autoplay></video>
+                <div class="video-label">You</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="meeting-menu">
+        <button class="btn disabled" id="muteBtn" title="Microphone must remain on">
+            <i class="fa-solid fa-microphone"></i>
+        </button>
+        <button class="btn disabled" id="videoBtn" title="Camera must remain on">
+            <i class="fa-solid fa-video"></i>
+        </button>
+        <button class="btn red" id="leaveBtn" title="End Interview">
+            <i class="fa-solid fa-phone-slash"></i>
+        </button>
+    </div>
+
+    <div id="warning-toast">
+        <i class="fas fa-exclamation-circle"></i> Camera and microphone cannot be turned off during interview
+    </div>
+
+    <script>
+        let webcamStream;
+        let videoTrack;
+        let audioTrack;
+        let terminateTimeout;
+        let parentWindow = window.opener;
+
+        function showWarning() {
+            const toast = document.getElementById("warning-toast");
+            toast.style.display = "block";
+            setTimeout(() => {
+                toast.style.display = "none";
+            }, 3000);
+        }
+
+        function showFocusWarning() {
+            const warning = document.getElementById("focus-warning");
+            warning.style.display = "block";
+            
+            // Give user 3 seconds to return before terminating
+            if (terminateTimeout) clearTimeout(terminateTimeout);
+            terminateTimeout = setTimeout(() => {
+                endInterview("Interview terminated: You switched tabs/windows");
+            }, 3000);
+        }
+
+        function hideFocusWarning() {
+            const warning = document.getElementById("focus-warning");
+            warning.style.display = "none";
+            if (terminateTimeout) clearTimeout(terminateTimeout);
+        }
+
+        async function startWebcam() {
+            try {
+                webcamStream = await navigator.mediaDevices.getUserMedia({ 
+                    video: true, 
+                    audio: false 
+                });
+                document.getElementById("webcamVideo").srcObject = webcamStream;
+                videoTrack = webcamStream.getVideoTracks()[0];
+                
+                // Disable the ability to turn off video/audio
+                videoTrack.enabled = true;
+                
+                // Make sure they stay on
+                videoTrack.addEventListener('ended', () => {
+                    endInterview("Interview terminated: Camera was disabled");
+                });
+            } catch (err) {
+                console.error("Error accessing media devices:", err);
+                endInterview("Could not access camera and microphone. Please enable them to continue.");
+            }
+        }
+
+        function setupEventListeners() {
+            document.getElementById("videoBtn").addEventListener("click", function() {
+                showWarning();
+            });
+
+            document.getElementById("muteBtn").addEventListener("click", function() {
+                showWarning();
+            });
+
+            document.getElementById("leaveBtn").addEventListener("click", function() {
+                endInterview("Interview ended by user");
+            });
+
+            // Monitor tab/window switches
+            document.addEventListener("visibilitychange", function() {
+                if (document.hidden) {
+                    showFocusWarning();
+                } else {
+                    hideFocusWarning();
+                }
+            });
+
+            window.addEventListener("blur", function() {
+                if (!document.hidden) {
+                    showFocusWarning();
+                }
+            });
+
+            window.addEventListener("focus", function() {
+                hideFocusWarning();
+            });
+
+            // Prevent closing with alert
+            window.addEventListener('beforeunload', function(e) {
+                if (!document.hidden) {
+                    e.preventDefault();
+                    e.returnValue = 'Are you sure you want to leave? The interview will be terminated.';
+                }
+            });
+        }
+
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(err => {
+                    console.log("Fullscreen error:", err);
+                    // Fallback to maximizing window
+                    window.moveTo(0, 0);
+                    window.resizeTo(screen.width, screen.height);
+                });
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+            }
+        }
+        
+
+        // In meeting.html, modify the endInterview function:
+        function endInterview(reason) {
+            // Notify parent window if it exists
+            if (parentWindow) {
+                parentWindow.postMessage({ type: 'interview_ended', reason: reason }, '*');
+            }
+            
+            // Stop media streams
+            if (webcamStream) {
+                webcamStream.getTracks().forEach(track => track.stop());
+            }
+            
+            // Send termination signal to server
+            fetch('/end_interview', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ action: 'terminate', reason: reason })
+            }).catch(err => console.log('Termination signal error:', err));
+            
+            // Close this window
+            setTimeout(() => {
+                window.close();
+            }, 1000);
+            
+            // Show termination message
+            alert(reason);
+        }
+        
+        // Initialize everything
+        window.onload = function() {
+
+            setTimeout(() => {
+                toggleFullscreen();
+            }, 500);
+
+            // Request fullscreen if available
+            if (document.documentElement.requestFullscreen) {
+                document.documentElement.requestFullscreen().catch(err => {
+                    console.log("Fullscreen error:", err);
+                });
+            }
+            
+            // Maximize window as fallback
+            window.moveTo(0, 0);
+            if (window.screen) {
+                window.resizeTo(screen.width, screen.height);
+            }
+            
+            startWebcam().then(() => {
+                setupEventListeners();
+            }).catch(err => {
+                console.error("Initialization error:", err);
+                endInterview("Initialization failed. Please try again.");
+            });
+        };
+    </script>
+</body>
+</html>

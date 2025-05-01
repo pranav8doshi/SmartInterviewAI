@@ -1,0 +1,22 @@
+Posture Analysis Report - 2025-04-30 00:45:45
+User: samu
+==================================================
+Dominant Emotion: neutral
+
+Average Confidence Level: 1.0/3
+Average Nervous Indicators: 0.0/3
+
+Gaze Analysis:
+Eyes Looking Away: 0 times
+Prolonged Look Away Events (>10s): 0
+Total Blinks: 0
+
+Multiple Face Detection:
+Total Events: 0
+No multiple face events detected.
+
+Shoulder Analysis:
+Shoulder Position Distribution:
+- neutral: 1 times
+
+Average Shoulder Confidence: 1.0/3

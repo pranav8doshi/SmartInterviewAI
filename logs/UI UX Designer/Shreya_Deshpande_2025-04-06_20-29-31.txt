@@ -1,8 +1,0 @@
-Q: How do you conduct user research?
-A: we conduct user research by taking user feedbacks or by talking to them personally some of them and we create feedback forms in our website which is inbuilt so yeah so we conduct user research by taking Google forms or users directly communicate with us through emails
-Score: 6/10
-----------------------------------------
-Q: That's a good start on collecting user feedback, how do you analyze and prioritize the feedback you receive from users to inform product decisions and improvements?
-A: I don't know
-Score: 0/10
-----------------------------------------

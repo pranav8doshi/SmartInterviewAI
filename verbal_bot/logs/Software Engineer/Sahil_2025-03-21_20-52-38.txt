@@ -1,4 +1,0 @@
-Q: Describe a project where you optimized performance.
-A: describe a project very optimised performance
-Score: 8/10
-----------------------------------------

@@ -1,0 +1,30 @@
+
+Interview Report
+===============
+Candidate: samikagandhi2004@gmail.com
+Role: Software Engineer
+Date: 2025-04-29_22-42-10
+Total Questions: 5
+Total Score: 2/50
+
+Detailed Results:
+
+Question 1: Can you explain object-oriented programming?
+Answer: object oriented programming books is a method
+Score: 2/10
+========================================
+
+Question 2: What specific aspects of object-oriented programming would you like to learn from these books, such as design patterns, principles, or best practices?
+Answer: i want to next question
+Score: 0/10
+========================================
+
+Question 3: What is your experience with cloud computing?
+Answer: Requested to skip question
+Score: 0/10
+========================================
+
+Question 4: Describe a project where you optimized performance.
+Answer: Requested to skip question
+Score: 0/10
+========================================
