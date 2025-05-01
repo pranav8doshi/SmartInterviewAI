@@ -3,6 +3,8 @@ import os
 import json
 import together
 import time
+import sounddevice as sd
+import numpy as np
 import speech_recognition as sr
 import pyttsx3
 from dotenv import load_dotenv
@@ -118,36 +120,75 @@ def speak(text):
     """Thread-safe speaking function with guaranteed feminine voice"""
     threading.Thread(target=_speak, args=(text,)).start()
 
+# def listen(max_attempts=2):
+#     """Listen to user input with limited retries and better continuous speech handling"""
+#     recognizer = sr.Recognizer()
+#     recognizer.pause_threshold = 3.0  # Increased pause threshold to allow for natural pauses
+#     recognizer.dynamic_energy_threshold = True  # Adjust for ambient noise changes
+#     recognizer.operation_timeout = None  # No timeout on operations
+    
+#     for attempt in range(max_attempts):
+#         try:
+#             with sr.Microphone() as source:
+#                 print("Adjusting for ambient noise...")
+#                 recognizer.adjust_for_ambient_noise(source, duration=1)
+#                 print(f"Listening (attempt {attempt + 1})...")
+                
+#                 # Listen with longer phrase time limit and no timeout
+#                 audio = recognizer.listen(
+#                     source, 
+#                     phrase_time_limit=15,  # Increased to 15 seconds
+#                     timeout=None  # No timeout while waiting for speech
+#                 )
+                
+#                 print("Processing speech...")
+#                 text = recognizer.recognize_google(audio)
+#                 print(f"You said: {text}")
+#                 return text.lower()
+                
+#         except sr.WaitTimeoutError:
+#             print("No speech detected")
+#             if attempt < max_attempts - 1:
+#                 speak("I didn't hear anything. Please answer the question.")
+#         except sr.UnknownValueError:
+#             print("Could not understand audio")
+#             if attempt < max_attempts - 1:
+#                 speak("Sorry, I didn't catch that. Could you repeat your answer?")
+#         except sr.RequestError as e:
+#             print(f"Could not request results; {e}")
+#             if attempt < max_attempts - 1:
+#                 speak("There was an error processing your answer. Please try again.")
+#         except Exception as e:
+#             print(f"Unexpected error: {e}")
+#             if attempt < max_attempts - 1:
+#                 speak("There was a problem. Please answer again.")
+    
+#     return None
+
 def listen(max_attempts=2):
-    """Listen to user input with limited retries and better continuous speech handling"""
+    """Listen to user input using sounddevice instead of PyAudio"""
     recognizer = sr.Recognizer()
-    recognizer.pause_threshold = 3.0  # Increased pause threshold to allow for natural pauses
-    recognizer.dynamic_energy_threshold = True  # Adjust for ambient noise changes
-    recognizer.operation_timeout = None  # No timeout on operations
+    samplerate = 16000  # 16kHz works well with Google API and speech_recognition
+    duration = 10  # seconds
     
     for attempt in range(max_attempts):
         try:
-            with sr.Microphone() as source:
-                print("Adjusting for ambient noise...")
-                recognizer.adjust_for_ambient_noise(source, duration=1)
-                print(f"Listening (attempt {attempt + 1})...")
-                
-                # Listen with longer phrase time limit and no timeout
-                audio = recognizer.listen(
-                    source, 
-                    phrase_time_limit=15,  # Increased to 15 seconds
-                    timeout=None  # No timeout while waiting for speech
-                )
-                
-                print("Processing speech...")
-                text = recognizer.recognize_google(audio)
-                print(f"You said: {text}")
-                return text.lower()
-                
-        except sr.WaitTimeoutError:
-            print("No speech detected")
-            if attempt < max_attempts - 1:
-                speak("I didn't hear anything. Please answer the question.")
+            print(f"Listening (attempt {attempt + 1})...")
+            speak("Please answer now.")
+
+            # Record audio with sounddevice
+            recording = sd.rec(int(duration * samplerate), samplerate=samplerate, channels=1, dtype='int16')
+            sd.wait()  # Wait until recording is finished
+            audio_data = np.squeeze(recording)
+
+            # Convert numpy array to AudioData object
+            audio = sr.AudioData(audio_data.tobytes(), samplerate, 2)
+
+            print("Processing speech...")
+            text = recognizer.recognize_google(audio)
+            print(f"You said: {text}")
+            return text.lower()
+
         except sr.UnknownValueError:
             print("Could not understand audio")
             if attempt < max_attempts - 1:
@@ -160,7 +201,7 @@ def listen(max_attempts=2):
             print(f"Unexpected error: {e}")
             if attempt < max_attempts - 1:
                 speak("There was a problem. Please answer again.")
-    
+
     return None
 
 def get_llama_response(prompt):

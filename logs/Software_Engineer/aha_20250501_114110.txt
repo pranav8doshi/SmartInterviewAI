@@ -1,0 +1,20 @@
+
+Interview Report
+===============
+Candidate: aha
+Role: Software Engineer
+Date: 2025-05-01_11-42-02
+Total Questions: 2
+Total Score: 4/20
+
+Detailed Results:
+
+Question 1: Can you explain object-oriented programming?
+Answer: yes yes i can explain the object oriented programming it is a part of programming in which objects are cre
+Score: 4/10
+========================================
+
+Question 2: Can you elaborate on the key principles of object-oriented programming, such as encapsulation, inheritance, and polymorphism, and provide an example of how they are applied in a programming language?
+Answer: question paper
+Score: 0/10
+========================================
