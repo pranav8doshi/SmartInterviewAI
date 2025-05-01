@@ -516,4 +516,4 @@ signal.signal(signal.SIGINT, lambda *args: cleanup())
 signal.signal(signal.SIGTERM, lambda *args: cleanup())
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
