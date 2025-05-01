@@ -7,4 +7,3 @@ sounddevice
 psutil
 requests
 gunicorn==23.0.0
-portaudio19-dev
