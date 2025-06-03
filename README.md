@@ -1,123 +1,116 @@
 
-# SmartInterviewAI 🧠🎤
+# SmartInterviewAI_Frontend 🎓🤖  
+**Empower Your Interviews with AI-Driven Insights**
 
-**A Smart AI-Powered Interview System** that evaluates answers, analyzes posture, and generates detailed reports using LLMs and speech recognition.
-
-![Python](https://img.shields.io/badge/Python-3.10-blue)
-![Flask](https://img.shields.io/badge/Flask-Web_Framework-lightgrey)
-![License](https://img.shields.io/badge/License-MIT-green)
-
----
-
-## 🔍 Overview
-
-SmartInterviewAI is a Flask-based application designed to conduct automated interviews using:
-- 🤖 LLM-based Question Generation & Scoring
-- 🗣️ Speech-to-Text with Google Speech API
-- 🧍 Posture & Attention Analysis
-- 📄 Auto-generated interview reports
+![GitHub repo size](https://img.shields.io/github/repo-size/pranav8doshi/SmartInterviewAI_Frontend)
+![GitHub last commit](https://img.shields.io/github/last-commit/pranav8doshi/SmartInterviewAI_Frontend)
+![GitHub language count](https://img.shields.io/github/languages/count/pranav8doshi/SmartInterviewAI_Frontend)
 
 ---
 
-## 🗂 Project Structure
+## 🚀 Overview
 
-```
-SMARTINTERVIEWAI-MAIN/
-├── app.py                      # Main Flask backend
-├── .env                        # Environment variables (API keys, etc.)
-├── static/                     # CSS, JS, media assets
-│   ├── css/styles.css
-│   ├── js/scripts.js
-│   └── ai.mp4
-├── templates/                  # HTML templates
-│   ├── index.html
-│   ├── interview.html
-│   ├── meeting.html
-│   └── result.html
-├── logs/                       # Interview reports and summaries
-│   ├── summary.txt
-│   └── Software_Engineer/
-├── interview_questions.json    # Predefined role-based questions
-├── posture_analysis.log        # Log of posture detection
-├── requirements.txt            # Python dependencies
-├── apt.txt                     # System packages (if applicable)
-└── vercel.json                 # Deployment config
-```
+**SmartInterviewAI_Frontend** is a modern web application that transforms the interview process using artificial intelligence. It dynamically generates industry-relevant questions and provides a streamlined, responsive, and collaborative interview environment.
+
+### 🔥 Key Features
+
+- 🎯 **AI-Powered Question Generation**: Tailored interview questions based on current industry trends.
+- 📱 **Real-Time Collaboration**: Chat and participant management for a dynamic interview experience.
+- 🔒 **Firebase Integration**: Secure user authentication and scalable data handling.
+- 📐 **Responsive Design**: Mobile-first design ensuring accessibility on all devices.
+- 🛠 **Customizable Components**: Reusable UI components for quick and clean development.
 
 ---
 
-## 🚀 Getting Started
+## 📦 Built With
+
+- **React** + **TypeScript**
+- **Firebase** (Authentication, Firestore)
+- **PostCSS** + **Autoprefixer**
+- **React Hook Form**
+- **Zod**
+- **date-fns**
+- **YAML**
+- **npm**
+
+---
+
+## 🧰 Getting Started
 
 ### ✅ Prerequisites
 
-- Python 3.10+
-- `pip` (Python package manager)
-- Microphone Access
-- Internet Connection (for API calls)
+Make sure you have the following installed:
 
-### 🔧 Installation
+- Node.js
+- npm
+- TypeScript
+
+### 📥 Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/pranav8doshi/SmartInterviewAI_Frontend.git
+   ```
+
+2. Navigate to the project directory:
+   ```bash
+   cd SmartInterviewAI_Frontend
+   ```
+
+3. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+---
+
+## 🚀 Usage
+
+Start the development server:
 
 ```bash
-git clone https://github.com/pranav8doshi/SmartInterviewAI
-cd SmartInterviewAI
-pip install -r requirements.txt
+npm start
 ```
 
-Make sure to create a `.env` file:
+---
+
+## 🧪 Testing
+
+> ⚠️ *Currently, the test framework placeholder (`{test_framework}`) is mentioned in the source — please replace with the actual framework used (e.g., Jest, Vitest, etc.)*
+
+Run the test suite:
 
 ```bash
-TOGETHER_API_KEY=your_together_api_key_here
+npm test
 ```
 
 ---
 
-## ▶️ Running the App
+## 🛣️ Roadmap
 
-```bash
-python app.py
-```
-
-Open browser at: [http://127.0.0.1:5000](http://127.0.0.1:5000)
-
----
-
-## ✨ Features
-
-- AI-generated and scored interview questions (via Together's LLaMA API)
-- Voice interaction using Google Speech-to-Text and `pyttsx3`
-- Dynamic follow-up questions
-- Real-time posture and attention analysis
-- Log and report generation
+- [ ] Add Admin Panel
+- [ ] Improve Accessibility (WCAG Compliance)
+- [ ] Integrate More AI Models
+- [ ] Optimize Performance for Low-End Devices
 
 ---
 
-## 🧪 Testing the Flow
+## 🤝 Contribution
 
-1. Open `/` — start interface
-2. Submit your name and role
-3. Answer AI questions via microphone
-4. See generated report after completion at `/result`
-
----
-
-## ⚙️ Deployment
-
-The app can be deployed on services like:
-- [Vercel (with vercel.json)](https://vercel.com)
-- [Render](https://render.com)
-- [Heroku](https://heroku.com)
+1. Fork the repository.
+2. Create your feature branch: `git checkout -b feature/awesome-feature`
+3. Commit your changes: `git commit -m 'Add awesome feature'`
+4. Push to the branch: `git push origin feature/awesome-feature`
+5. Open a pull request 🚀
 
 ---
 
-## 📜 License
+## 🙌 Acknowledgements
 
-MIT © 2025 Pranav Doshi
+- GitDocify for README templating
+- Firebase for backend infrastructure
+- OpenAI & community contributors
 
 ---
 
-## 🙏 Acknowledgements
-
-- [Together API](https://www.together.ai/)
-- [SpeechRecognition](https://pypi.org/project/SpeechRecognition/)
-- [OpenAI](https://openai.com/)
-- [Flask](https://flask.palletsprojects.com/)
+> Feel free to ⭐ this repo if you find it helpful!
